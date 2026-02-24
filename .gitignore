@@ -1,0 +1,21 @@
+.env
+.env.*
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+
+# Backend (when at repo root)
+backend/.env
+backend/.venv/
+backend/home_energy.db
+
+# Frontend
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
