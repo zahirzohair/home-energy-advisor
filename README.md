@@ -47,7 +47,7 @@ npm install
 npm run dev
 ```
 
-# set the debug in .evn to true to see the swagger
+### set the debug in .evn to true to see the swagger
 #DEBUG=true
 
 Open **http://localhost:3000** (backend runs on port 8000).
