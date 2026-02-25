@@ -132,8 +132,10 @@ I used AI coding assistants during development. Below is a concise log of tools,
 - **backend/** – FastAPI app (`app/`, `alembic/`, `tests/`)
 - **frontend/** – Vue 3 + TypeScript + Vite + Tailwind
 
-### Project Directory Tree
 
+## Project Directory Tree
+
+```text
 home-energy-advisor/
 │
 ├─ backend/                        # FastAPI backend
@@ -143,7 +145,7 @@ home-energy-advisor/
 │  │  ├─ api/                      # API route handlers
 │  │  │   └─ homes.py
 │  │  │
-│  │  ├─ core/                     # Core infrastructure (config, db, constants)
+│  │  ├─ core/                     # Core infrastructure
 │  │  │   ├─ config.py
 │  │  │   ├─ database.py
 │  │  │   └─ messages.py
@@ -152,17 +154,17 @@ home-energy-advisor/
 │  │  │   ├─ __init__.py
 │  │  │   └─ home.py
 │  │  │
-│  │  ├─ schemas/                  # Pydantic schemas (API contracts)
+│  │  ├─ schemas/                  # Pydantic schemas
 │  │  │   ├─ __init__.py
 │  │  │   ├─ home.py
 │  │  │   └─ advice.py
 │  │  │
-│  │  ├─ services/                 # Business logic layer
+│  │  ├─ services/                 # Business logic
 │  │  │   ├─ __init__.py
 │  │  │   ├─ home_service.py
 │  │  │   └─ llm_service.py
 │  │  │
-│  │  └─ main.py                   # FastAPI app instance / entrypoint
+│  │  └─ main.py                   # FastAPI entrypoint
 │  │
 │  ├─ alembic/                     # Database migrations
 │  │  ├─ env.py
@@ -178,30 +180,30 @@ home-energy-advisor/
 │  ├─ alembic.ini
 │  └─ requirements.txt
 │
-├─ frontend/                       # Vue + Vite frontend
+├─ frontend/                       # Vue + Typescript + Vite frontend
 │  │
 │  ├─ src/
 │  │  │
-│  │  ├─ components/               # Reusable UI components
+│  │  ├─ components/
 │  │  │  ├─ AdviceResults.vue
 │  │  │  ├─ HomeForm.vue
 │  │  │  ├─ ToastContainer.vue
-│  │  │  └─ ui/                    # Base UI primitives
+│  │  │  └─ ui/
 │  │  │     ├─ Button.vue
 │  │  │     ├─ Card.vue
 │  │  │     ├─ Input.vue
 │  │  │     └─ Label.vue
 │  │  │
-│  │  ├─ composables/              # Vue composables (logic hooks)
+│  │  ├─ composables/
 │  │  │  └─ useToast.ts
 │  │  │
-│  │  ├─ lib/                      # Utilities & API clients
+│  │  ├─ lib/
 │  │  │  ├─ utils.ts
 │  │  │  └─ api/
 │  │  │     ├─ client.ts
 │  │  │     └─ homes.ts
 │  │  │
-│  │  ├─ types/                    # TypeScript types
+│  │  ├─ types/
 │  │  │  └─ home.ts
 │  │  │
 │  │  ├─ assets/
@@ -220,3 +222,4 @@ home-energy-advisor/
 ├─ README.md
 ├─ example.env
 └─ .gitignore
+```
