@@ -119,6 +119,9 @@ I used AI coding assistants during development. Below is a concise log of tools,
 
 - **Backend (critical):** The generated API did not enforce strict request validation on all inputs and returned raw Python tracebacks to the client on 500 errors, exposing internal paths and dependencies. I had to add strict Pydantic schemas for every endpoint, implement global exception handlers, and ensure only safe, structured error messages (e.g. `{"detail": "..."}`) are returned so production never leaks internals.
 
+- Used Python 3.10 union types which caused runtime error on Python 3.9
+- Fixed by switching to Optional typing
+
 ---
 ### Code tour (for new developers)
 
