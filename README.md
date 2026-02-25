@@ -120,14 +120,103 @@ I used AI coding assistants during development. Below is a concise log of tools,
 - **Backend (critical):** The generated API did not enforce strict request validation on all inputs and returned raw Python tracebacks to the client on 500 errors, exposing internal paths and dependencies. I had to add strict Pydantic schemas for every endpoint, implement global exception handlers, and ensure only safe, structured error messages (e.g. `{"detail": "..."}`) are returned so production never leaks internals.
 
 ---
+### Code tour (for new developers)
+
+**Backend:** Request flow is `api/homes.py` → `services/` → `models/`. Schemas in `schemas/` define request/response shapes. Config lives in `core/config.py` (env vars, CORS); `core/database.py` sets up SQLAlchemy. Start at `main.py` and follow the router imports.
+
+**Frontend:** `App.vue` orchestrates the form and results. `HomeForm.vue` handles input and validation; `AdviceResults.vue` renders recommendations. API calls are in `lib/api/homes.ts`.
+
 
 ## Project structure
 
 - **backend/** – FastAPI app (`app/`, `alembic/`, `tests/`)
 - **frontend/** – Vue 3 + TypeScript + Vite + Tailwind
 
-### Code tour (for new developers)
+### Project Directory Tree
 
-**Backend:** Request flow is `api/homes.py` → `services/` → `models/`. Schemas in `schemas/` define request/response shapes. Config lives in `core/config.py` (env vars, CORS); `core/database.py` sets up SQLAlchemy. Start at `main.py` and follow the router imports.
-
-**Frontend:** `App.vue` orchestrates the form and results. `HomeForm.vue` handles input and validation; `AdviceResults.vue` renders recommendations. API calls are in `lib/api/homes.ts`.
+home-energy-advisor/
+│
+├─ backend/                        # FastAPI backend
+│  │
+│  ├─ app/                         # Application source code
+│  │  │
+│  │  ├─ api/                      # API route handlers
+│  │  │   └─ homes.py
+│  │  │
+│  │  ├─ core/                     # Core infrastructure (config, db, constants)
+│  │  │   ├─ config.py
+│  │  │   ├─ database.py
+│  │  │   └─ messages.py
+│  │  │
+│  │  ├─ models/                   # SQLAlchemy models
+│  │  │   ├─ __init__.py
+│  │  │   └─ home.py
+│  │  │
+│  │  ├─ schemas/                  # Pydantic schemas (API contracts)
+│  │  │   ├─ __init__.py
+│  │  │   ├─ home.py
+│  │  │   └─ advice.py
+│  │  │
+│  │  ├─ services/                 # Business logic layer
+│  │  │   ├─ __init__.py
+│  │  │   ├─ home_service.py
+│  │  │   └─ llm_service.py
+│  │  │
+│  │  └─ main.py                   # FastAPI app instance / entrypoint
+│  │
+│  ├─ alembic/                     # Database migrations
+│  │  ├─ env.py
+│  │  ├─ script.py.mako
+│  │  └─ versions/
+│  │      └─ 2026_02_23_12_00_abc123_initial_homes_table.py
+│  │
+│  ├─ tests/                       # Backend tests
+│  │  ├─ conftest.py
+│  │  ├─ test_api.py
+│  │  └─ test_llm_service.py
+│  │
+│  ├─ alembic.ini
+│  └─ requirements.txt
+│
+├─ frontend/                       # Vue + Vite frontend
+│  │
+│  ├─ src/
+│  │  │
+│  │  ├─ components/               # Reusable UI components
+│  │  │  ├─ AdviceResults.vue
+│  │  │  ├─ HomeForm.vue
+│  │  │  ├─ ToastContainer.vue
+│  │  │  └─ ui/                    # Base UI primitives
+│  │  │     ├─ Button.vue
+│  │  │     ├─ Card.vue
+│  │  │     ├─ Input.vue
+│  │  │     └─ Label.vue
+│  │  │
+│  │  ├─ composables/              # Vue composables (logic hooks)
+│  │  │  └─ useToast.ts
+│  │  │
+│  │  ├─ lib/                      # Utilities & API clients
+│  │  │  ├─ utils.ts
+│  │  │  └─ api/
+│  │  │     ├─ client.ts
+│  │  │     └─ homes.ts
+│  │  │
+│  │  ├─ types/                    # TypeScript types
+│  │  │  └─ home.ts
+│  │  │
+│  │  ├─ assets/
+│  │  │  └─ main.css
+│  │  │
+│  │  ├─ App.vue
+│  │  ├─ main.ts
+│  │  └─ vite-env.d.ts
+│  │
+│  ├─ index.html
+│  ├─ package.json
+│  ├─ package-lock.json
+│  ├─ tsconfig.json
+│  └─ vite.config.ts
+│
+├─ README.md
+├─ example.env
+└─ .gitignore
