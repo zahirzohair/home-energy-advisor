@@ -28,7 +28,7 @@ async function handleSubmit(values: HomeFormValues) {
       size_sqm: values.size_sqm,
       year_built: values.year_built ?? undefined,
       heating_type: values.heating_type,
-      insulation: values.insulation ?? undefined,
+      insulation: values.insulation || undefined,
       notes: values.notes ?? undefined,
     });
     const { recommendations: recs } = await getAdvice(home.id);

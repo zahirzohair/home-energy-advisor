@@ -43,8 +43,16 @@ In a second terminal:
 
 ```bash
 cd home-energy-advisor/frontend
+npm run build
 npm install
 npm run dev
+```
+
+If TypeScript complains about missing Node types during build, install them once:
+
+```bash
+cd frontend
+npm install --save-dev @types/node
 ```
 
 ### set the debug in .evn to true to see the swagger
