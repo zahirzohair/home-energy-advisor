@@ -43,8 +43,8 @@ In a second terminal:
 
 ```bash
 cd home-energy-advisor/frontend
-npm run build
 npm install
+npm run build
 npm run dev
 ```
 
